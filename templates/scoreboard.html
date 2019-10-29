@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Score Board{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block header_text %}SCORE BOARD{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="container text-center">
+            <h3>{{ round.round_name }}</h3>
+            {% for team in round.teams %}
+                <p id="{{ team }}">{{ team }} : {{ round.teams[team] }}</p>        
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        var filename = '{{ round.round_name }}';
+    </script>
+    <script src="{{ url_for('static', filename='js/updater.js') }}"></script>
+{% endblock %}

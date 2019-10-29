@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block header_text %}ADMIN{% endblock %}
+{% block content %}
+    <div class="container">
+        {% if method == "GET" %}
+        <div class="row mt-5">
+            <form action="/admin" class="mx-auto" method="POST">
+                <div class="form-group text-center">
+                    <label for="roundName center">Round password:</label>
+                    <input type="password" class="form-control" name="password" id="roundPassword">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        {% else %}
+            <div class="row mt-5">
+                <form action="/update-score" class="mx-auto" method="POST">
+                    {% for team in teams %}
+                        <div class="form-group text-center">
+                            <label for="roundName center">{{ team }}:</label>
+                            <input type="text" class="form-control" name="{{ team }}" id="{{ team }}" value="{{ teams[team] }}">
+                        </div>
+                    {% endfor %}
+                    <div class="form-group text-center">
+                        <label for="roundName center">Round password:</label>
+                        <input type="text" class="form-control" name="password" id="roundPassword" value="{{ round_name }}" readonly>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
