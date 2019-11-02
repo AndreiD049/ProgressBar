@@ -16,12 +16,11 @@ setInterval(() => {
         {
             // update the values
             let teams = JSON.parse(xhr.responseText);
-            Object.keys(teams).forEach(key=>{
-                let el = document.getElementById(key);
-                el.innerText = key + " : " + teams[key];
-            });
+            // Object.keys(teams).forEach(key=>{
+            //     let el = document.getElementById(key);
+            //     el.innerText = key + " : " + teams[key];
+            // });
+            app.update_from_object(teams);
         }
     }
-
-    console.log(filename);
 }, 3000);

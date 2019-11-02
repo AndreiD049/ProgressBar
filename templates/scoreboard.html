@@ -5,13 +5,13 @@
 {% endblock %}
 {% block header_text %}SCORE BOARD{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container-fluid mt-5">
     <div class="row">
-        <div class="container text-center">
-            <h3>{{ round.round_name }}</h3>
+        <div class="container-fluid text-center" id="canv">
+            <!-- <h3>{{ round.round_name }}</h3>
             {% for team in round.teams %}
                 <p id="{{ team }}">{{ team }} : {{ round.teams[team] }}</p>        
-            {% endfor %}
+            {% endfor %} -->
         </div>
     </div>
 </div>
@@ -19,6 +19,10 @@
 {% block scripts %}
     <script>
         var filename = '{{ round.round_name }}';
+        var bunnies = "{{ url_for('static', filename='img/atlas.json') }}";
+        var start = "{{ url_for('static', filename='img/Start.png') }}";
+        var finish = "{{ url_for('static', filename='img/Finish.png') }}";
     </script>
     <script src="{{ url_for('static', filename='js/updater.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
