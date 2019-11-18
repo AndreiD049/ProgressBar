@@ -24,7 +24,7 @@
                     {% for team in teams %}
                         <div class="form-group text-center">
                             <label for="roundName center">{{ team }}:</label>
-                            <input type="text" class="form-control" name="{{ team }}" id="{{ team }}" value="{{ teams[team] }}">
+                            <input type="text" class="form-control" name="{{ teams[team]['name'] }}" id="{{ teams[team]['name'] }}" value="{{ teams[team]['score'] }}">
                         </div>
                     {% endfor %}
                     <div class="form-group text-center">

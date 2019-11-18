@@ -62,12 +62,13 @@ class ScoreBoard
     // method that initializes teams based on the passed object
     init_teams(teams)
     {
+        console.log(teams);
         this.teams = {};
         // insert each team object in the teams array
-        Object.keys(teams).forEach((team_name, idx) =>
+        Object.keys(teams).forEach((t, idx) =>
             {
                 // this.teams.push(new this.team_class(this, team_name, teams[team_name], idx));
-                this.teams[team_name] = new this.team_class(this, team_name, teams[team_name], idx);
+                this.teams[teams[t]["name"]] = new this.team_class(this, teams[t]["name"], teams[t]["score"], idx, teams[t]["color"]);
             });
     };
 
@@ -150,7 +151,7 @@ class ScoreBoard
         Object.keys(obj).forEach((team, idx) => {
             if (this.teams.hasOwnProperty(team))
             {
-                setTimeout(this.teams[team].update_score.bind(this.teams[team], obj[team]), Utils.random_int(0, 2000));
+                setTimeout(this.teams[team].update_score.bind(this.teams[team], obj[team]["score"]), Utils.random_int(0, 2000));
             }
         }, this);
     }
@@ -359,6 +360,7 @@ class TeamRabbit extends Team
     {
         super(app, name, score, index);
         this.init_sprite();
+        this.color = color;
         this.sprite.tint = color || 0xffffff; // color should be a hexadecimal number
     };
 
@@ -680,15 +682,10 @@ class Utils
 }
 
 
-// TEST
+// Start
 
-app = new ScoreBoard(
-    {
-        "Team 1": 0,
-        "Team 2": 0,
-        "Team 3": 0,
-        "Team 4": 0
-    },
+let app = new ScoreBoard(
+    teams_json,
     2000,
     500,
     100

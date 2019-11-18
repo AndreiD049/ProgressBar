@@ -3,7 +3,7 @@ from logic.round import Round
 import json
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
 @app.route('/')
 def index():
@@ -13,13 +13,14 @@ def index():
 def scoreboard():
     if request.method == "POST":
         round_name = request.form["password"]
-        r = Round(round_name, ["Team 1", "Team 2", "Team 3"])
+        teams = [{"name": request.form[k], "color": "0x" + request.form["color-"+k][1:]} for k in request.form.keys() if k.startswith("team")]
+        r = Round(round_name, teams)
         if r.exists():
             r.open_existing()
-            print(r.teams)
         else:
             r.create_self()
-        return render_template("scoreboard.html", round=r)
+        print("sending %s" % r.teams)
+        return render_template("scoreboard.html", round=r, teams=json.dumps(r.teams))
     else:
         return render_template("404.html")
 
@@ -61,4 +62,4 @@ def get_data(filename):
         return "sosi"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)

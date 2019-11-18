@@ -7,21 +7,22 @@
 {% block content %}
 <div class="container-fluid mt-5">
     <div class="row">
+        <button id="fullscreenbtn" type="submit" class="btn btn-primary mx-auto mb-5">FULL SCREEN</button>
+    </div>
+    <div class="row">
         <div class="container-fluid text-center" id="canv">
-            <!-- <h3>{{ round.round_name }}</h3>
-            {% for team in round.teams %}
-                <p id="{{ team }}">{{ team }} : {{ round.teams[team] }}</p>        
-            {% endfor %} -->
         </div>
     </div>
 </div>
 {% endblock %}
 {% block scripts %}
     <script>
-        var filename = '{{ round.round_name }}';
-        var bunnies = "{{ url_for('static', filename='img/atlas.json') }}";
-        var start = "{{ url_for('static', filename='img/Start.png') }}";
-        var finish = "{{ url_for('static', filename='img/Finish.png') }}";
+        let filename = '{{ round.round_name }}';
+        let bunnies = "{{ url_for('static', filename='img/atlas.json') }}";
+        let start = "{{ url_for('static', filename='img/Start.png') }}";
+        let finish = "{{ url_for('static', filename='img/Finish.png') }}";
+        let teams_json = JSON.parse({{ teams|tojson }});
+        console.log(teams_json);
     </script>
     <script src="{{ url_for('static', filename='js/updater.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
