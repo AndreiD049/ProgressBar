@@ -12,10 +12,34 @@
                     <label for="roundName center">Round password:</label>
                     <input type="password" class="form-control" name="password" id="roundPassword">
                 </div>
+                <div class="form-group text-center">
+                    <label for="roundName center">Team 1:</label>
+                    <input type="text" class="form-control" name="team1" id="tean1">
+                    <input type="color" class="colorinput">
+                </div>
                 <div class="text-center">
+                    <button type="button" class="btn btn-primary">Add team</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        let colors = document.querySelectorAll(".colorinput");
+        colors.forEach(color => {
+            let picker = new CP(color);
+            color.addEventListener("click", function(evt) {
+                evt.preventDefault();
+            });
+
+            picker.on("change", function(color) {
+                this.source.value = "#" + color;
+            });
+        })
+    });
+</script>
 {% endblock %}

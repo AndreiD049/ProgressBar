@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
 from logic.round import Round
+import json
 
 app = Flask(__name__)
+app.debug = True
 
 @app.route('/')
 def index():
@@ -20,7 +22,7 @@ def scoreboard():
         return render_template("scoreboard.html", round=r)
     else:
         return render_template("404.html")
-        
+
 @app.route('/admin', methods=["GET", "POST"])
 def admin():
     if request.method == "POST":
@@ -54,7 +56,9 @@ def get_data(filename):
     r = Round(filename)
     if r.exists():
         r.open_existing()
-        return r.teams
+        return json.dumps(r.teams)
+    else:
+        return "sosi"
 
 if __name__ == "__main__":
     app.run(debug=True)

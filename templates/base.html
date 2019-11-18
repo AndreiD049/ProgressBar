@@ -3,6 +3,8 @@
 <head>
     {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/color-picker.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
@@ -21,9 +23,9 @@
     </div>
     <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/pixi.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/color-picker.js') }}"></script>
     {% block scripts %}
     {% endblock %}
 </body>
