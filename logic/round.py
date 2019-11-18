@@ -41,7 +41,9 @@ class Round:
         # expects that round_name already exists
         db_path = os.path.join(os.getcwd(), "data", self.round_name)
         db = shelve.open(db_path)
-        for k in db.keys():
+        db_keys = list(db.keys())
+        db_keys.sort()
+        for k in db_keys:
             self.teams[k] = db[k]
         db.close()
 
