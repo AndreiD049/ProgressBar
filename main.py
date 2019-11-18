@@ -19,8 +19,9 @@ def scoreboard():
             r.open_existing()
         else:
             r.create_self()
-        print("sending %s" % r.teams)
-        return render_template("scoreboard.html", round=r, teams=json.dumps(r.teams))
+        t_keys = list(r.teams.keys())
+        t_keys.sort()
+        return render_template("scoreboard.html", round=r, teams=json.dumps({k: r.teams[k] for k in t_keys}))
     else:
         return render_template("404.html")
 
