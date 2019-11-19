@@ -617,6 +617,7 @@ class Trace
         this.team = team;
         this.color = color || 0xff0000;
         this.box = null;
+        this.max_width = 0;
         this.init_trace();
     }
 
@@ -624,12 +625,14 @@ class Trace
     {
         let rect = new PIXI.Graphics();
         let start = this.team.app.app.stage.getChildByName("start");
+        let finish = this.team.app.app.stage.getChildByName("finish");
         rect.beginFill(this.color);
         rect.drawRect(0, 0, this.team.sprite.height / 3, this.team.sprite.height / 3);
         rect.endFill();
         rect.width = 0;
         rect.x = this.team.app.offset + start.height;
         rect.y = this.team.sprite.y - this.team.sprite.height / 2 - rect.height / 2;
+        this.max_width = finish.x - rect.x;
         this.box = rect;
         this.attach_trace();
     };
@@ -645,7 +648,8 @@ class Trace
         let sprite_tail = this.team.sprite.x - this.team.sprite.width
         if (sprite_tail > this.box.x)
         {
-            this.box.width = sprite_tail - this.box.x;
+            let tail_width = sprite_tail - this.box.x 
+            this.box.width = tail_width < this.max_width ? tail_width: this.max_width;
         }
     }
 }
